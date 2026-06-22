@@ -1,23 +1,20 @@
-let loginValido = [];
-
 const login = (event) => {
     event.preventDefault();
 
-
-    const usuario = document.getElementById("email");
+    const usuario = document.getElementById("nome");
     const senhaUser = document.getElementById("senha");
 
-    
-    let autorizado = false;
-    loginValido.forEach((item) => {
-        if (item.email == usuario.value && item.senha == senhaUser.value) {
-            autorizado = true;
-        }
-    });
+    const listaLoginsValidos = JSON.parse(localStorage.getItem('usuariosParaLogin'));
 
-    if (autorizado) {
-        alert('login liberado!');
-    } else {
-        alert('usuário ou senha incorretos.');
+    const usuarioValidado = listaLoginsValidos.find((item) =>
+        item.nome === usuario.value && item.senha === senhaUser.value
+    );
+    
+    if (usuarioValidado) {
+        alert('ele pode entrar!', usuarioValidado);
+        window.location.href = 'https://www.google.com/';
     }
-}   
+    else {
+        alert('ele não pode entrar!');
+    }
+}
