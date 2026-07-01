@@ -10,7 +10,7 @@ const cardLista = [
   {
     id: 2,
     titulo: "1 Raquete Joola + 12 Bolinhas Joola",
-    subtitulo: "R$850,00",
+    subtitulo: "R$ 850,00",
     imagem: "figure_produto2",
   },
   {
@@ -27,17 +27,22 @@ const cardLista = [
   },
 ];
 
+container.innerHTML = "";
+
 cardLista.forEach((card) => {
   const cardHTML = `
-
-    <div class="div_produto">
-            <figure id="${card.imagem}">
-            </figure>
-            <h3>${card.titulo}</h3>
-            <h2>${card.subtitulo}</h2>
-            <button type="submit">Comprar</button>
-    </div>
+        <div class="div_produto" onclick="verDetalhes(${card.id})"> 
+            <figure id="${card.imagem}"></figure> 
+            <h3>${card.titulo}</h3> 
+            <h2>${card.subtitulo}</h2> 
+            <button type="submit">Comprar</button> 
+        </div>
     `;
 
   container.innerHTML += cardHTML;
 });
+
+function verDetalhes(id) {
+  localStorage.setItem("cardSelecionadoId", id);
+  window.location.href = "../Detalhes/detalhes.html";
+}
